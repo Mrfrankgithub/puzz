@@ -121,6 +121,7 @@
       z-index: 1100;
     }
     .hamburger span { width: 32px; height: 2px; background: #d4af37; margin: 5px 0; }
+
     .mobile-menu {
       position: fixed;
       top: 0;
@@ -128,7 +129,7 @@
       width: 70%;
       max-width: 350px;
       height: 100vh;
-      background: rgba(0,0,0,0.95);
+      background:blur(15px);
       backdrop-filter: blur(25px);
       z-index: 1050;
       display: flex;
@@ -136,8 +137,9 @@
       justify-content: center;
       align-items: center;
       gap: 2.5rem;
-      transition: right 0.5s;
-      border-left: 2px solid #d4af37;
+      transition: right 0.5s ;
+      border-left: 2px solid #000000;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
     .mobile-menu.active { right: 0; }
     .mobile-menu a { color: white; font-size: 2rem; font-family: 'Playfair Display', serif; text-decoration: none; }
