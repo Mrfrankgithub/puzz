@@ -439,24 +439,7 @@
       .stack-img:nth-child(3) { left: 160px; }
     }
 
-    /* ----- GEAR (tools) ----- */
-    .gear-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .gear-item {
-      background: #1a1a1a;
-      border-radius: 30px;
-      padding: 2rem 1rem;
-      text-align: center;
-      border: 1px solid #333;
-      transition: 0.2s;
-    }
-    .gear-item:hover { border-color: #d4af37; transform: translateY(-5px); }
-    .gear-item i { font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; }
-    .gear-item h4 { font-size: 1.3rem; margin: 0.5rem 0; }
+    
 
     /* ----- TESTIMONIALS (swiper) ----- */
     .testimonials {
@@ -594,19 +577,54 @@
   </section>
 
   <!-- GEAR (tools) -->
-  <section style="background:#111;" class="section-curved">
-    <div class="container">
-      <h2>Our <span>tools</span></h2>
-      <div class="gear-grid">
-        <div class="gear-item"><i class="fas fa-camera"></i><h4>Leica M11</h4><p>main camera</p></div>
-        <div class="gear-item"><i class="fas fa-camera-retro"></i><h4>Canon R5</h4><p>video & motion</p></div>
-        <div class="gear-item"><i class="fas fa-eye"></i><h4>50mm f/1.2</h4><p>portrait lens</p></div>
-        <div class="gear-item"><i class="fas fa-helicopter"></i><h4>DJI Inspire 3</h4><p>aerial</p></div>
-        <div class="gear-item"><i class="fas fa-lightbulb"></i><h4>Profoto</h4><p>studio lighting</p></div>
-        <div class="gear-item"><i class="fas fa-tools"></i><h4>Gitzo tripod</h4><p>stability</p></div>
+ <!-- GEAR (tools) - FIXED -->
+<section style="background: #111; padding: 4rem 2rem;" class="section-curved">
+  <div class="container">
+    <h2>Our <span>tools</span></h2>
+    <style>
+      .gear-item {
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .gear-item:hover {
+        transform: translateY(-8px);
+        border-color: #d4af37 !important;
+        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+      }
+    </style>
+    <div class="gear-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-camera" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Leica M11</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">main camera</p>
+      </div>
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-camera-retro" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Canon R5</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">video & motion</p>
+      </div>
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-eye" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">50mm f/1.2</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">portrait lens</p>
+      </div>
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-helicopter" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">DJI Inspire 3</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">aerial</p>
+      </div>
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-lightbulb" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Profoto</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">studio lighting</p>
+      </div>
+      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
+        <i class="fas fa-tools" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
+        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Gitzo tripod</h4>
+        <p style="color: #f5f5f5; opacity: 0.8;">stability</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- TESTIMONIALS carousel -->
   <section class="testimonials section-curved">
@@ -614,10 +632,10 @@
       <h2>Kind <span>words</span></h2>
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Puzz made our wedding day eternal. Every glance, every tear — perfectly captured."</p><div class="client-name">— Ama & Kwame</div></div>
-          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"They handled my father's memorial with such grace. The photos are a treasure."</p><div class="client-name">— Nana Esi</div></div>
+          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Puzz made our wedding day eternal. Every glance, every tear — perfectly captured."</p><div class="client-name">— Ama & Stanley</div></div>
+          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"They handled my father's memorial with such grace. The photos are a treasure."</p><div class="client-name">— Nana Esio</div></div>
           <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Our anniversary shoot felt like a movie. Puzz’s team is pure magic."</p><div class="client-name">— Mr & Mrs Ofori</div></div>
-          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Birthday surprise? They captured the laughter, the cake, the chaos — beautiful."</p><div class="client-name">— Efia</div></div>
+          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Birthday surprise? They captured the laughter, the cake, the chaos — beautiful."</p><div class="client-name">— Frank Steve</div></div>
         </div>
         <div class="swiper-pagination"></div>
       </div>
