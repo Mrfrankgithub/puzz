@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Primary Meta Tags -->
   <title>PUZZ · photography & films</title>
@@ -25,16 +25,30 @@
   <meta property="twitter:description" content="Puzz photography: cinematic wedding, burial, birthday & anniversary coverage. Based in Accra, available worldwide.">
   <meta property="twitter:image" content="./images/logo.jpeg">
 
-  
   <!-- fallback for old browsers -->
   <link rel="shortcut icon" href="./images/logo.jpeg">
-  <title>PUZZ · photography & films</title>
+
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts: Inter & Playfair Display -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Preload critical assets -->
+  <link rel="preload" as="video" href="./images/love.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80">
+  <link rel="preload" as="image" href="./images/bday.jpeg">
+  <link rel="preload" as="image" href="./images/anniversary.jpeg">
+  <link rel="preload" as="image" href="./images/clife.jpeg">
+  <link rel="preload" as="image" href="./images/corporate.jpeg">
+  <link rel="preload" as="image" href="./images/engagement.jpeg">
+  <link rel="preload" as="image" href="./images/flower3.jpg">
+  <link rel="preload" as="image" href="./images/scape.jpg">
+  <link rel="preload" as="image" href="./images/woman.jpg">
+  <link rel="preload" as="image" href="./images/krists-luhaers-YhC216tAYAg-unsplash.jpg">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80">
+
   <style>
     /* ----- RESET & VARIABLES ----- */
     * {
@@ -71,7 +85,7 @@
     }
     h2 span { color: #d4af37; }
     .gold { color: #d4af37; }
-     .btn {
+    .btn {
       display: inline-block;
       background: transparent;
       border: 1px solid rgba(245, 245, 245, 0.3);
@@ -264,7 +278,6 @@
       font-weight: 800;
       line-height: 1.0;
       max-width: 1000px;
-      
       margin-bottom: 1rem;
       font-family: 'Playfair Display', serif;
       text-shadow: 0 5px 15px #000;
@@ -527,7 +540,7 @@
 
   <!-- HERO with video and rotating text -->
   <section class="hero">
-    <video id="hero-video" autoplay muted loop playsinline >
+    <video id="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600">
       <source src="./images/love.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -549,17 +562,16 @@
       <h2>Moments <span>we've framed</span></h2>
     </div>
     <div class="marquee">
-      <!-- Cards will be duplicated for seamless loop; we use 8 cards from previous request -->
-      <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" loading="lazy" alt="wedding"><div class="card-content"><h3>Wedding</h3><p>"Make your day memorable."</p></div></div>
-      <div class="marquee-card"><img src="./images/bday.jpeg" loading="lazy" alt="birthday"><div class="card-content"><h3>Birthday</h3><p>"Make every year count.."</p></div></div>
-      <div class="marquee-card"><img src="./images/anniversary.jpeg" loading="lazy" alt="anniversary"><div class="card-content"><h3>Anniversary</h3><p>"Make every year count.."</p></div></div>
-      <div class="marquee-card"><img src="./images/clife.jpeg" loading="lazy" alt="celebration"><div class="card-content"><h3>Celebration of life</h3><p>"Always remember the moments that matter"</p></div></div>
-      <div class="marquee-card"><img src="./images/corporate.jpeg" loading="lazy" alt="corporate"><div class="card-content"><h3>Corporate</h3><p>"Standout anywhere, anytime."</p></div></div>
-      <div class="marquee-card"><img src="./images/engagement.jpeg" loading="lazy" alt="engagement"><div class="card-content"><h3>Engagement</h3><p>"Make your day unforgettable."</p></div></div>
+      <!-- Cards - lazy loading REMOVED, all images load immediately -->
+      <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="wedding"><div class="card-content"><h3>Wedding</h3><p>"Make your day memorable."</p></div></div>
+      <div class="marquee-card"><img src="./images/bday.jpeg" alt="birthday"><div class="card-content"><h3>Birthday</h3><p>"Make every year count.."</p></div></div>
+      <div class="marquee-card"><img src="./images/anniversary.jpeg" alt="anniversary"><div class="card-content"><h3>Anniversary</h3><p>"Make every year count.."</p></div></div>
+      <div class="marquee-card"><img src="./images/clife.jpeg" alt="celebration"><div class="card-content"><h3>Celebration of life</h3><p>"Always remember the moments that matter"</p></div></div>
+      <div class="marquee-card"><img src="./images/corporate.jpeg" alt="corporate"><div class="card-content"><h3>Corporate</h3><p>"Standout anywhere, anytime."</p></div></div>
+      <div class="marquee-card"><img src="./images/engagement.jpeg" alt="engagement"><div class="card-content"><h3>Engagement</h3><p>"Make your day unforgettable."</p></div></div>
       <!-- duplicate for seamless loop -->
-      <div class="marquee-card"><img src="./images/flower3.jpg" loading="lazy" alt="wedding"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
-      <div class="marquee-card"><img src="./images/scape.jpg" loading="lazy" alt="birthday"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
-
+      <div class="marquee-card"><img src="./images/flower3.jpg" alt="wedding"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
+      <div class="marquee-card"><img src="./images/scape.jpg" alt="birthday"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
     </div>
     <div class="btn-wrapper">
       <a href="gallery.html" class="btn btn-gold">view our gallery</a>
@@ -680,7 +692,7 @@
       // GSAP hero animations
       gsap.from('.hero-content h1', { y: 80, opacity: 0, duration: 1.6, ease: 'power3.out' });
       gsap.from('.hero-content p', { y: 40, opacity: 0, duration: 1.4, delay: 0.4, ease: 'power3.out' });
-    //   gsap.from('.hero-content .btn', { scale: 0.8, opacity: 0, duration: 1.2, delay: 0.8, ease: 'back.out(1.7)' });
+      // gsap.from('.hero-content .btn', { scale: 0.8, opacity: 0, duration: 1.2, delay: 0.8, ease: 'back.out(1.7)' });
       gsap.from('.scroll-indicator', { opacity: 0, delay: 1.8, duration: 1 });
 
       // Swiper testimonial
@@ -693,7 +705,7 @@
         breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
       });
 
-      // Scroll reveal animations
+      // Scroll reveal animations (these fade in as you scroll, but content is already visible)
       gsap.registerPlugin(ScrollTrigger);
       gsap.utils.toArray('.marquee-card, .gear-item, .swiper-slide, .about-text').forEach(el => {
         gsap.from(el, {
