@@ -56,13 +56,18 @@
       padding: 0;
       box-sizing: border-box;
     }
-    html { scroll-behavior: auto; }
+    html { 
+      scroll-behavior: auto;
+      overflow-x: hidden; /* ← CRITICAL FIX */
+    }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0b0b0b;
       color: #f5f5f5;
-      overflow-x: hidden;
+      overflow-x: hidden; /* ← CRITICAL FIX */
       line-height: 1.5;
+      width: 100%;
+      max-width: 100vw; /* ← CRITICAL FIX */
     }
     section {
       padding: 7rem 2rem;
@@ -75,6 +80,7 @@
     .container {
       max-width: 1400px;
       margin: 0 auto;
+      padding: 0 1rem;
     }
     h2 {
       font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -198,8 +204,9 @@
       width: 70%;
       max-width: 350px;
       height: 100vh;
-      background:blur(15px);
+      background: rgba(0,0,0,0.95);
       backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       z-index: 1050;
       display: flex;
       flex-direction: column;
@@ -207,7 +214,7 @@
       align-items: center;
       gap: 2.5rem;
       transition: right 0.5s cubic-bezier(0.77,0.2,0.05,1);
-      border-left: 2px solid #000000;
+      border-left: 2px solid #d4af37;
       box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
     .mobile-menu.active { right: 0; }
@@ -300,7 +307,6 @@
       33%, 63% { content: "Every desire."; }
       66%, 100% { content: "Every memory."; }
     }
-    /* fallback: use pseudo-element but we'll use JS for reliability */
     .hero-content p {
       font-size: clamp(1.3rem, 3vw, 2rem);
       font-weight: 300;
@@ -324,24 +330,34 @@
     }
     @keyframes bounce { 0%,100%{ transform: translateX(-50%) translateY(0); } 50%{ transform: translateX(-50%) translateY(-12px); } }
 
-    /* ----- INFINITE SCROLLING SHOWCASE (Moments we've framed) ----- */
+    /* ----- INFINITE SCROLLING SHOWCASE (FIXED) ----- */
     .marquee-section {
       padding: 4rem 0;
-      overflow: hidden;
+      overflow: hidden; /* ← CRITICAL FIX: hides horizontal scroll */
       background: #0b0b0b;
+      width: 100%;
+      max-width: 100vw;
     }
     .marquee-title {
       padding-left: 2rem;
       margin-bottom: 2rem;
     }
+    .marquee-wrapper {
+      overflow: hidden; /* ← CRITICAL FIX */
+      width: 100%;
+      position: relative;
+    }
     .marquee {
       display: flex;
       width: max-content;
       animation: scrollLeft 40s linear infinite;
+      will-change: transform;
     }
-    .marquee:hover { animation-play-state: running; } /* no pause, as requested */
+    .marquee:hover { 
+      animation-play-state: running; 
+    }
     .marquee-card {
-      width: 350px;
+      width: 300px; /* ← FIXED: smaller for better responsiveness */
       margin: 0 1rem;
       border-radius: 30px;
       overflow: hidden;
@@ -351,20 +367,21 @@
     }
     .marquee-card img {
       width: 100%;
-      height: 280px;
+      height: 250px;
       object-fit: cover;
+      display: block;
     }
     .marquee-card .card-content {
       padding: 1.5rem;
     }
     .marquee-card h3 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-family: 'Playfair Display', serif;
       color: #d4af37;
       margin-bottom: 0.3rem;
     }
     .marquee-card p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       opacity: 0.8;
       font-style: italic;
     }
@@ -375,6 +392,7 @@
     .btn-wrapper {
       text-align: center;
       margin-top: 3rem;
+      padding: 0 1rem;
     }
 
     /* ----- ABOUT with stacked images ----- */
@@ -392,6 +410,7 @@
       flex: 1 1 300px;
       position: relative;
       height: 400px;
+      min-height: 300px;
     }
     .stack-img {
       position: absolute;
@@ -429,17 +448,66 @@
       line-height: 1.8;
       color: #ddd;
       font-weight: 300;
+      padding: 0 1rem;
     }
     .about-text strong { color: #d4af37; }
     @media (max-width: 900px) {
       .about-flex { flex-direction: column; }
-      .about-images { height: 300px; width: 100%; }
-      .stack-img { width: 200px; height: 250px; }
-      .stack-img:nth-child(2) { left: 80px; }
-      .stack-img:nth-child(3) { left: 160px; }
+      .about-images { height: 250px; width: 100%; max-width: 400px; margin: 0 auto; }
+      .stack-img { width: 180px; height: 220px; }
+      .stack-img:nth-child(2) { left: 60px; top: 20px; }
+      .stack-img:nth-child(3) { left: 120px; top: 40px; }
+      .about-text { font-size: 1.1rem; }
+    }
+    @media (max-width: 480px) {
+      .stack-img { width: 140px; height: 180px; }
+      .stack-img:nth-child(2) { left: 40px; top: 15px; }
+      .stack-img:nth-child(3) { left: 80px; top: 30px; }
+      .marquee-card { width: 220px; }
+      .marquee-card img { height: 180px; }
     }
 
-    
+    /* ----- GEAR (tools) ----- */
+    .gear-section {
+      background: #111;
+      padding: 4rem 2rem;
+    }
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding: 0 0.5rem;
+    }
+    .gear-item {
+      background: #1a1a1a;
+      border-radius: 30px;
+      padding: 2rem 1rem;
+      text-align: center;
+      border: 1px solid #333;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gear-item:hover {
+      transform: translateY(-8px);
+      border-color: #d4af37 !important;
+      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+    }
+    .gear-item i {
+      font-size: 2.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .gear-item h4 {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      color: #f5f5f5;
+    }
+    .gear-item p {
+      color: #f5f5f5;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
 
     /* ----- TESTIMONIALS (swiper) ----- */
     .testimonials {
@@ -454,7 +522,7 @@
       border-radius: 40px;
       padding: 3rem 2rem;
       text-align: center;
-      border: 1px solid #d4af3720;
+      border: 1px solid rgba(212, 175, 55, 0.125);
       box-shadow: 0 25px 40px -15px #000;
     }
     .swiper-slide p { font-size: 1.3rem; font-style: italic; margin: 1.5rem 0; color: #ddd; }
@@ -494,7 +562,29 @@
     }
     .footer-right a:hover { color: #d4af37; }
     @media (max-width: 600px) {
-      .footer { flex-direction: column; text-align: center; }
+      .footer { flex-direction: column; text-align: center; padding: 2rem; }
+      .footer-right { gap: 2rem; }
+    }
+
+    /* ----- RESPONSIVE FIXES ----- */
+    @media (max-width: 768px) {
+      section { padding: 4rem 1rem; }
+      .hero-content { padding: 0 5%; }
+      .marquee-card { width: 250px; }
+      .marquee-card img { height: 200px; }
+      .gear-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+      .hero-content p { font-size: 1rem; }
+      .btn { padding: 0.7rem 1.8rem; font-size: 0.9rem; }
+      .marquee-card { width: 200px; margin: 0 0.5rem; }
+      .marquee-card img { height: 160px; }
+      .marquee-card .card-content { padding: 1rem; }
+      .marquee-card h3 { font-size: 1.2rem; }
+      .swiper-slide { padding: 2rem 1rem; }
+      .swiper-slide p { font-size: 1rem; }
+      .contact-cta { padding: 4rem 1rem; }
     }
   </style>
 </head>
@@ -539,22 +629,24 @@
     </div>
   </section>
 
-  <!-- INFINITE SCROLLING SHOWCASE (Moments we've framed) -->
+  <!-- INFINITE SCROLLING SHOWCASE (FIXED) -->
   <section class="marquee-section">
     <div class="marquee-title container">
       <h2>Moments <span>we've framed</span></h2>
     </div>
-    <div class="marquee">
-      <!-- Cards - lazy loading REMOVED, all images load immediately -->
-      <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="wedding"><div class="card-content"><h3>Wedding</h3><p>"Make your day memorable."</p></div></div>
-      <div class="marquee-card"><img src="./images/bday.jpeg" alt="birthday"><div class="card-content"><h3>Birthday</h3><p>"Make every year count.."</p></div></div>
-      <div class="marquee-card"><img src="./images/anniversary.jpeg" alt="anniversary"><div class="card-content"><h3>Anniversary</h3><p>"Make every year count.."</p></div></div>
-      <div class="marquee-card"><img src="./images/clife.jpeg" alt="celebration"><div class="card-content"><h3>Celebration of life</h3><p>"Always remember the moments that matter"</p></div></div>
-      <div class="marquee-card"><img src="./images/corporate.jpeg" alt="corporate"><div class="card-content"><h3>Corporate</h3><p>"Standout anywhere, anytime."</p></div></div>
-      <div class="marquee-card"><img src="./images/engagement.jpeg" alt="engagement"><div class="card-content"><h3>Engagement</h3><p>"Make your day unforgettable."</p></div></div>
-      <!-- duplicate for seamless loop -->
-      <div class="marquee-card"><img src="./images/flower3.jpg" alt="wedding"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
-      <div class="marquee-card"><img src="./images/scape.jpg" alt="birthday"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
+    <div class="marquee-wrapper">
+      <div class="marquee">
+        <!-- Cards -->
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="wedding" loading="lazy"><div class="card-content"><h3>Wedding</h3><p>"Make your day memorable."</p></div></div>
+        <div class="marquee-card"><img src="./images/bday.jpeg" alt="birthday" loading="lazy"><div class="card-content"><h3>Birthday</h3><p>"Make every year count."</p></div></div>
+        <div class="marquee-card"><img src="./images/anniversary.jpeg" alt="anniversary" loading="lazy"><div class="card-content"><h3>Anniversary</h3><p>"Make every year count."</p></div></div>
+        <div class="marquee-card"><img src="./images/clife.jpeg" alt="celebration" loading="lazy"><div class="card-content"><h3>Celebration of life</h3><p>"Always remember the moments that matter"</p></div></div>
+        <div class="marquee-card"><img src="./images/corporate.jpeg" alt="corporate" loading="lazy"><div class="card-content"><h3>Corporate</h3><p>"Standout anywhere, anytime."</p></div></div>
+        <div class="marquee-card"><img src="./images/engagement.jpeg" alt="engagement" loading="lazy"><div class="card-content"><h3>Engagement</h3><p>"Make your day unforgettable."</p></div></div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-card"><img src="./images/flower3.jpg" alt="outdoor" loading="lazy"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
+        <div class="marquee-card"><img src="./images/scape.jpg" alt="outdoor" loading="lazy"><div class="card-content"><h3>Outdoor</h3><p>"Always make it count."</p></div></div>
+      </div>
     </div>
     <div class="btn-wrapper">
       <a href="gallery.html" class="btn btn-gold">view our gallery</a>
@@ -565,66 +657,55 @@
   <section class="about-stacked section-curved" id="about">
     <div class="container about-flex">
       <div class="about-images">
-        <img class="stack-img" src="./images/woman.jpg" alt="puzz team">
-        <img class="stack-img" src="./images/krists-luhaers-YhC216tAYAg-unsplash.jpg" alt="puzz behind scenes">
-        <img class="stack-img" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80" alt="puzz camera">
+        <img class="stack-img" src="./images/woman.jpg" alt="puzz team" loading="lazy">
+        <img class="stack-img" src="./images/krists-luhaers-YhC216tAYAg-unsplash.jpg" alt="puzz behind scenes" loading="lazy">
+        <img class="stack-img" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80" alt="puzz camera" loading="lazy">
       </div>
       <div class="about-text">
         <h2>About <span>Puzz</span></h2>
-        <p><strong>Puzz</strong> isn’t just a name — it’s a promise. Leading a team of devoted visual storytellers, Puzz has spent over a decade documenting life’s most profound moments: from the intimacy of a burial to the euphoria of a wedding, from the first birthday candle to the golden anniversary. We don’t just take photos; we curate legacies. Based in Accra, available worldwide.</p>
+        <p><strong>Puzz</strong> isn't just a name — it's a promise. Leading a team of devoted visual storytellers, Puzz has spent over a decade documenting life's most profound moments: from the intimacy of a burial to the euphoria of a wedding, from the first birthday candle to the golden anniversary. We don't just take photos; we curate legacies. Based in Accra, available worldwide.</p>
       </div>
     </div>
   </section>
 
   <!-- GEAR (tools) -->
- <!-- GEAR (tools) - FIXED -->
-<section style="background: #111; padding: 4rem 2rem;" class="section-curved">
-  <div class="container">
-    <h2>Our <span>tools</span></h2>
-    <style>
-      .gear-item {
-        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      }
-      .gear-item:hover {
-        transform: translateY(-8px);
-        border-color: #d4af37 !important;
-        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
-      }
-    </style>
-    <div class="gear-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-camera" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Leica M11</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">main camera</p>
-      </div>
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-camera-retro" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Canon R5</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">video & motion</p>
-      </div>
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-eye" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">50mm f/1.2</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">portrait lens</p>
-      </div>
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-helicopter" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">DJI Inspire 3</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">aerial</p>
-      </div>
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-lightbulb" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Profoto</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">studio lighting</p>
-      </div>
-      <div class="gear-item" style="background: #1a1a1a; border-radius: 30px; padding: 2rem 1rem; text-align: center; border: 1px solid #333;">
-        <i class="fas fa-tools" style="font-size: 2.8rem; color: #d4af37; margin-bottom: 0.5rem; display: block;"></i>
-        <h4 style="font-size: 1.3rem; margin: 0.5rem 0; color: #f5f5f5;">Gitzo tripod</h4>
-        <p style="color: #f5f5f5; opacity: 0.8;">stability</p>
+  <section class="gear-section section-curved">
+    <div class="container">
+      <h2>Our <span>tools</span></h2>
+      <div class="gear-grid">
+        <div class="gear-item">
+          <i class="fas fa-camera"></i>
+          <h4>Leica M11</h4>
+          <p>main camera</p>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-camera-retro"></i>
+          <h4>Canon R5</h4>
+          <p>video & motion</p>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-eye"></i>
+          <h4>50mm f/1.2</h4>
+          <p>portrait lens</p>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-helicopter"></i>
+          <h4>DJI Inspire 3</h4>
+          <p>aerial</p>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-lightbulb"></i>
+          <h4>Profoto</h4>
+          <p>studio lighting</p>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-tools"></i>
+          <h4>Gitzo tripod</h4>
+          <p>stability</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- TESTIMONIALS carousel -->
   <section class="testimonials section-curved">
@@ -634,7 +715,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Puzz made our wedding day eternal. Every glance, every tear — perfectly captured."</p><div class="client-name">— Ama & Stanley</div></div>
           <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"They handled my father's memorial with such grace. The photos are a treasure."</p><div class="client-name">— Nana Esio</div></div>
-          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Our anniversary shoot felt like a movie. Puzz’s team is pure magic."</p><div class="client-name">— Mr & Mrs Ofori</div></div>
+          <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Our anniversary shoot felt like a movie. Puzz's team is pure magic."</p><div class="client-name">— Mr & Mrs Ofori</div></div>
           <div class="swiper-slide"><i class="fas fa-quote-left gold" style="font-size:2rem;"></i><p>"Birthday surprise? They captured the laughter, the cake, the chaos — beautiful."</p><div class="client-name">— Frank Steve</div></div>
         </div>
         <div class="swiper-pagination"></div>
@@ -644,7 +725,7 @@
 
   <!-- CONTACT CTA -->
   <section class="contact-cta">
-    <h2>Let’s tell your story.</h2>
+    <h2>Let's tell your story.</h2>
     <a href="contact.html" class="btn btn-gold" style="font-size:1.5rem; padding:1.2rem 4rem;">Contact Us</a>
   </section>
 
@@ -710,7 +791,6 @@
       // GSAP hero animations
       gsap.from('.hero-content h1', { y: 80, opacity: 0, duration: 1.6, ease: 'power3.out' });
       gsap.from('.hero-content p', { y: 40, opacity: 0, duration: 1.4, delay: 0.4, ease: 'power3.out' });
-      // gsap.from('.hero-content .btn', { scale: 0.8, opacity: 0, duration: 1.2, delay: 0.8, ease: 'back.out(1.7)' });
       gsap.from('.scroll-indicator', { opacity: 0, delay: 1.8, duration: 1 });
 
       // Swiper testimonial
@@ -723,7 +803,7 @@
         breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
       });
 
-      // Scroll reveal animations (these fade in as you scroll, but content is already visible)
+      // Scroll reveal animations
       gsap.registerPlugin(ScrollTrigger);
       gsap.utils.toArray('.marquee-card, .gear-item, .swiper-slide, .about-text').forEach(el => {
         gsap.from(el, {
